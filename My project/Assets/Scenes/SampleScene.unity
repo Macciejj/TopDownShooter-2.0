@@ -218,6 +218,10 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: e0b0abd9-2a1e-41ff-a937-4b8e3aab3669
     m_ActionName: InGameActionMap/Move[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 023b3ebc-4ed9-43f7-a5d2-d06b009a20d5
+    m_ActionName: InGameActionMap/Shot[/Mouse/leftButton]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: InGameActionMap
@@ -236,6 +240,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 88394454}
+  rangeWeapon: {fileID: 1830594974}
   <MovementSpeed>k__BackingField: 0.1
   <RotationSpeed>k__BackingField: 15
 --- !u!4 &392480710
@@ -600,6 +605,36 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f3e27eecb190e44a9af50723c394274, type: 3}
+--- !u!1 &1302842052
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1302842053}
+  m_Layer: 0
+  m_Name: RifflePosition
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1302842053
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1302842052}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.0036, y: 0.0904, z: 0.7055}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1830594973}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1400875296
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -738,6 +773,35 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 682255724988b1541af0927787d8456e, type: 3}
+--- !u!1 &1830594972 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1341255972871256, guid: c25ac4fdc903e7d49a7520930673ecd6, type: 3}
+  m_PrefabInstance: {fileID: 767189108}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1830594973 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4620998167008108, guid: c25ac4fdc903e7d49a7520930673ecd6, type: 3}
+  m_PrefabInstance: {fileID: 767189108}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1830594974
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1830594972}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd26599f656567d40a5dc7a8f2c0d39f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <AttackSpeed>k__BackingField: 5
+  <SoundName>k__BackingField: 
+  <MaxBullets>k__BackingField: 10
+  <MaxAmmo>k__BackingField: 2
+  <RifflePosition>k__BackingField: {fileID: 1302842053}
+  <Bullet>k__BackingField: {fileID: 0}
+  <ReloadTime>k__BackingField: 2
 --- !u!4 &1964883671 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4580766925885248, guid: 2f3e27eecb190e44a9af50723c394274, type: 3}

@@ -1,4 +1,4 @@
-// GENERATED AUTOMATICALLY FROM 'Assets/InputActions.inputactions'
+// GENERATED AUTOMATICALLY FROM 'Assets/Scripts/InputActions.inputactions'
 
 using System;
 using System.Collections;
@@ -23,6 +23,14 @@ public class @InputActions : IInputActionCollection, IDisposable
                     ""type"": ""Value"",
                     ""id"": ""e0b0abd9-2a1e-41ff-a937-4b8e3aab3669"",
                     ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Shot"",
+                    ""type"": ""Value"",
+                    ""id"": ""023b3ebc-4ed9-43f7-a5d2-d06b009a20d5"",
+                    ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
                 }
@@ -82,6 +90,17 @@ public class @InputActions : IInputActionCollection, IDisposable
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""53215b16-2d78-4d08-ae74-193fe8f44c79"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Shot"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -91,6 +110,7 @@ public class @InputActions : IInputActionCollection, IDisposable
         // InGameActionMap
         m_InGameActionMap = asset.FindActionMap("InGameActionMap", throwIfNotFound: true);
         m_InGameActionMap_Move = m_InGameActionMap.FindAction("Move", throwIfNotFound: true);
+        m_InGameActionMap_Shot = m_InGameActionMap.FindAction("Shot", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -141,11 +161,13 @@ public class @InputActions : IInputActionCollection, IDisposable
     private readonly InputActionMap m_InGameActionMap;
     private IInGameActionMapActions m_InGameActionMapActionsCallbackInterface;
     private readonly InputAction m_InGameActionMap_Move;
+    private readonly InputAction m_InGameActionMap_Shot;
     public struct InGameActionMapActions
     {
         private @InputActions m_Wrapper;
         public InGameActionMapActions(@InputActions wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_InGameActionMap_Move;
+        public InputAction @Shot => m_Wrapper.m_InGameActionMap_Shot;
         public InputActionMap Get() { return m_Wrapper.m_InGameActionMap; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -158,6 +180,9 @@ public class @InputActions : IInputActionCollection, IDisposable
                 @Move.started -= m_Wrapper.m_InGameActionMapActionsCallbackInterface.OnMove;
                 @Move.performed -= m_Wrapper.m_InGameActionMapActionsCallbackInterface.OnMove;
                 @Move.canceled -= m_Wrapper.m_InGameActionMapActionsCallbackInterface.OnMove;
+                @Shot.started -= m_Wrapper.m_InGameActionMapActionsCallbackInterface.OnShot;
+                @Shot.performed -= m_Wrapper.m_InGameActionMapActionsCallbackInterface.OnShot;
+                @Shot.canceled -= m_Wrapper.m_InGameActionMapActionsCallbackInterface.OnShot;
             }
             m_Wrapper.m_InGameActionMapActionsCallbackInterface = instance;
             if (instance != null)
@@ -165,6 +190,9 @@ public class @InputActions : IInputActionCollection, IDisposable
                 @Move.started += instance.OnMove;
                 @Move.performed += instance.OnMove;
                 @Move.canceled += instance.OnMove;
+                @Shot.started += instance.OnShot;
+                @Shot.performed += instance.OnShot;
+                @Shot.canceled += instance.OnShot;
             }
         }
     }
@@ -172,5 +200,6 @@ public class @InputActions : IInputActionCollection, IDisposable
     public interface IInGameActionMapActions
     {
         void OnMove(InputAction.CallbackContext context);
+        void OnShot(InputAction.CallbackContext context);
     }
 }
