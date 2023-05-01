@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerMover : MonoBehaviour, InputActions.IInGameActionMapActions
 {
+    [SerializeField] Animator animator;
     private InputActions inputActions;
     private Vector3 movementDirection;
     private Vector3 movement;
@@ -22,18 +23,24 @@ public class PlayerMover : MonoBehaviour, InputActions.IInGameActionMapActions
         inputActions.InGameActionMap.Disable();
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         transform.position += movement;
         transform.forward = Vector3.Lerp(transform.forward, movementDirection, Time.deltaTime * RotationSpeed);
+        animator.SetFloat("movement Speed", movement.magnitude);
     }
 
     public void OnMove(InputAction.CallbackContext context)
-    { 
+    {
+        Vector2 inputMovement = context.ReadValue<Vector2>();
         movement = Vector3.zero;
-        if(context.ReadValue<Vector2>() == Vector2.zero) return;
-        movementDirection = new Vector3(context.ReadValue<Vector2>().x, 0, context.ReadValue<Vector2>().y);
+        if (inputMovement == Vector2.zero)
+        {         
+            return;
+        } 
+        movementDirection = new Vector3(inputMovement.x, 0, inputMovement.y);
         movementDirection.Normalize();
         movement = MovementSpeed* movementDirection;
+        
     }
 }
