@@ -9,6 +9,7 @@ public class PlayerMover : MonoBehaviour, InputActions.IInGameActionMapActions
 
     [SerializeField] RangeWeapon rangeWeapon;
     private InputActions inputActions;
+    private Rigidbody rigidbody;
     private Vector3 movementDirection;
     private Vector3 movement;
     private bool isShooting = false;
@@ -24,7 +25,10 @@ public class PlayerMover : MonoBehaviour, InputActions.IInGameActionMapActions
         inputActions.InGameActionMap.SetCallbacks(this);
         inputActions.InGameActionMap.Enable();
     }
-
+    private void Start()
+    {
+        rigidbody = GetComponent<Rigidbody>();
+    }
     private void OnDisable()
     {
         inputActions.InGameActionMap.Disable();
@@ -32,7 +36,7 @@ public class PlayerMover : MonoBehaviour, InputActions.IInGameActionMapActions
 
     private void FixedUpdate()
     {
-        transform.position += movement;
+        rigidbody.velocity = movement;
         transform.forward = Vector3.Lerp(transform.forward, movementDirection, Time.deltaTime * RotationSpeed);
         animator.SetFloat("movement Speed", movement.magnitude);
         if (isShooting) rangeWeapon.Attack(animator);
