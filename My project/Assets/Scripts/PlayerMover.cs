@@ -7,7 +7,6 @@ public class PlayerMover : MonoBehaviour, InputActions.IInGameActionMapActions
 {
     [SerializeField] Animator animator;
     [SerializeField] Camera mainCamera;
-    [SerializeField] Transform cube;
 
     [SerializeField] RangeWeapon rangeWeapon;
     private InputActions inputActions;
@@ -39,8 +38,10 @@ public class PlayerMover : MonoBehaviour, InputActions.IInGameActionMapActions
     private void FixedUpdate()
     {
         rigidbody.velocity = movement;
-        
-        animator.SetFloat("movement Speed", movement.magnitude);
+        animator.SetFloat("movement Speed x", movement.x);
+        animator.SetFloat("movement Speed y", movement.z);
+        Debug.Log(movement.x);
+        Debug.Log(movement.z);
         if (isShooting) rangeWeapon.Attack(animator);
     }
 
@@ -77,8 +78,6 @@ public class PlayerMover : MonoBehaviour, InputActions.IInGameActionMapActions
         Vector2 inputMousePos = context.ReadValue<Vector2>();
         Vector3 mouseWorldPos = mainCamera.ScreenToWorldPoint(new Vector3(inputMousePos.x, inputMousePos.y, Vector3.Distance(mainCamera.transform.position, transform.position)));
         Vector3 rotationDirection = new Vector3(mouseWorldPos.x, transform.position.y, mouseWorldPos.z) - transform.position;
-        cube.position = rotationDirection;
-        Debug.Log(rotationDirection);
 
         rotationDirection.Normalize();
         transform.forward = Vector3.Lerp(transform.forward, rotationDirection, Time.deltaTime * RotationSpeed);
