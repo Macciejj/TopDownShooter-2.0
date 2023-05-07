@@ -33,6 +33,14 @@ public class @InputActions : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Rotate"",
+                    ""type"": ""Value"",
+                    ""id"": ""4fd82e67-fb1b-4c92-af87-58de4c0ff99a"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -101,6 +109,17 @@ public class @InputActions : IInputActionCollection, IDisposable
                     ""action"": ""Shot"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c87ce3a5-72dd-479b-897e-9f79242f99f6"",
+                    ""path"": ""<Mouse>/position"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Rotate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -111,6 +130,7 @@ public class @InputActions : IInputActionCollection, IDisposable
         m_InGameActionMap = asset.FindActionMap("InGameActionMap", throwIfNotFound: true);
         m_InGameActionMap_Move = m_InGameActionMap.FindAction("Move", throwIfNotFound: true);
         m_InGameActionMap_Shot = m_InGameActionMap.FindAction("Shot", throwIfNotFound: true);
+        m_InGameActionMap_Rotate = m_InGameActionMap.FindAction("Rotate", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -162,12 +182,14 @@ public class @InputActions : IInputActionCollection, IDisposable
     private IInGameActionMapActions m_InGameActionMapActionsCallbackInterface;
     private readonly InputAction m_InGameActionMap_Move;
     private readonly InputAction m_InGameActionMap_Shot;
+    private readonly InputAction m_InGameActionMap_Rotate;
     public struct InGameActionMapActions
     {
         private @InputActions m_Wrapper;
         public InGameActionMapActions(@InputActions wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_InGameActionMap_Move;
         public InputAction @Shot => m_Wrapper.m_InGameActionMap_Shot;
+        public InputAction @Rotate => m_Wrapper.m_InGameActionMap_Rotate;
         public InputActionMap Get() { return m_Wrapper.m_InGameActionMap; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -183,6 +205,9 @@ public class @InputActions : IInputActionCollection, IDisposable
                 @Shot.started -= m_Wrapper.m_InGameActionMapActionsCallbackInterface.OnShot;
                 @Shot.performed -= m_Wrapper.m_InGameActionMapActionsCallbackInterface.OnShot;
                 @Shot.canceled -= m_Wrapper.m_InGameActionMapActionsCallbackInterface.OnShot;
+                @Rotate.started -= m_Wrapper.m_InGameActionMapActionsCallbackInterface.OnRotate;
+                @Rotate.performed -= m_Wrapper.m_InGameActionMapActionsCallbackInterface.OnRotate;
+                @Rotate.canceled -= m_Wrapper.m_InGameActionMapActionsCallbackInterface.OnRotate;
             }
             m_Wrapper.m_InGameActionMapActionsCallbackInterface = instance;
             if (instance != null)
@@ -193,6 +218,9 @@ public class @InputActions : IInputActionCollection, IDisposable
                 @Shot.started += instance.OnShot;
                 @Shot.performed += instance.OnShot;
                 @Shot.canceled += instance.OnShot;
+                @Rotate.started += instance.OnRotate;
+                @Rotate.performed += instance.OnRotate;
+                @Rotate.canceled += instance.OnRotate;
             }
         }
     }
@@ -201,5 +229,6 @@ public class @InputActions : IInputActionCollection, IDisposable
     {
         void OnMove(InputAction.CallbackContext context);
         void OnShot(InputAction.CallbackContext context);
+        void OnRotate(InputAction.CallbackContext context);
     }
 }

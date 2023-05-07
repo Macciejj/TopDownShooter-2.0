@@ -32,7 +32,7 @@ public class RangeWeapon : Weapon
             base.Attack(animator);
             if (canAttack) 
             {
-                Debug.Log("Shot");
+                CreateBullet();
                 canAttack = false;
             }
             
