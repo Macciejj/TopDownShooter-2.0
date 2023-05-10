@@ -43,8 +43,6 @@ public class AIMover : MonoBehaviour
                 weapon.Attack(animator);
             }
         }
-        //animator.SetFloat("movement Speed", navMesh.velocity.magnitude);
-        //if()
     }
 
     private void LateUpdate()
